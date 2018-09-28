@@ -1,5 +1,5 @@
 import codecs
-from data_load_utils import one_hot
+from data_load_utils import one_hot, process_date_air_official
 
 AirQualityStationVocab = ['STA-BG0040A', 'STA-BG0050A', 'STA-BG0052A', 'STA-BG0054A', 'STA-BG0073A', 'STA-BG0079A']
 SamplingProcessVocab = ['SPP-BG_A_BETA_andersenFH62IR', 'SPP-BG_A_BETA_thermo5030SHARP']
@@ -38,6 +38,7 @@ def rewrite_lines(new_file_path = '../../datathlon data/air-quality-official/Pro
             split[13], # DatetimeBegin
             split[14]  # DatetimeEnd
         ]
+        process_date_air_official(split[13])
         new_file.write(','.join(array) + '\n')
 
 if __name__ == "__main__":
