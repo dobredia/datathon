@@ -69,7 +69,7 @@ def _bits_to_geohash(value):
 
 
 # Public
-def decode(value):
+def decode1(value):
     """Decode a geohash. Returns a (lon,lat) pair."""
     assert value, "Invalid geohash: %s" % value
     # Get the GeoHash bits
@@ -152,4 +152,4 @@ def neighborsfit(centroid, points):
             break
     return g[0:-1]
 
-print(decode('sx3wvzu7f6h'))
+# print(decode1('sx3wvzu7f6h'))
