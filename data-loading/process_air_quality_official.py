@@ -1,4 +1,8 @@
 import codecs
+from data_load_utils import one_hot
+
+AirQualityStationVocab = ['STA-BG0040A', 'STA-BG0050A', 'STA-BG0052A', 'STA-BG0054A', 'STA-BG0073A', 'STA-BG0079A']
+SamplingProcessVocab = ['SPP-BG_A_BETA_andersenFH62IR', 'SPP-BG_A_BETA_thermo5030SHARP']
 
 '''
     0.  Countrycode,
@@ -24,14 +28,15 @@ def rewrite_lines(new_file_path = '../../datathlon data/air-quality-official/Pro
     new_file = open(new_file_path, "w")
     f = codecs.open(file_to_read_path, "r", "utf-16")
     lines = f.readlines()
-    for line in lines:
+    for line in lines[1:]:
         split = line.split(',')
-        array = [
-            split[3], # AirQualityStation
-            split[6], # SamplingProcess
+        array = []
+        array += one_hot(split[3], AirQualityStationVocab) # AirQualityStation
+        array += one_hot(split[6], SamplingProcessVocab)   # SamplingProcess
+        array += [
             split[11], # Concentration
             split[13], # DatetimeBegin
-            split[14] # DatetimeEnd
+            split[14]  # DatetimeEnd
         ]
         new_file.write(','.join(array) + '\n')
 
