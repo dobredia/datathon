@@ -26,7 +26,14 @@ def rewrite_lines(new_file_path = '../../datathlon data/air-quality-official/Pro
     lines = f.readlines()
     for line in lines:
         split = line.split(',')
-        print(split)
+        array = [
+            split[3], # AirQualityStation
+            split[6], # SamplingProcess
+            split[11], # Concentration
+            split[13], # DatetimeBegin
+            split[14] # DatetimeEnd
+        ]
+        new_file.write(','.join(array) + '\n')
 
 if __name__ == "__main__":
     rewrite_lines()
