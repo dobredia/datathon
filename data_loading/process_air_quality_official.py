@@ -82,7 +82,7 @@ def merge_all_files_for_heatmap(new_file_path = '../../datathlon data/air-qualit
     file_paths = [
         dir_path + '/' + f
             for f in listdir(dir_path)
-                if isfile(join(dir_path, f)) and f.startswith('BG') and ( f.endswith('2018_timeseries.csv') or f.endswith('2017_timeseries.csv') )
+                if isfile(join(dir_path, f)) and f.startswith('BG') and f.endswith('2018_timeseries.csv')
     ]
     for path in file_paths:
         rewrite_lines_for_heatmap(new_file_path = new_file_path, file_to_read_path = path, file_writing_mode = 'a')

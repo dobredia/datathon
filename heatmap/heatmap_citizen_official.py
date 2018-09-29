@@ -53,10 +53,10 @@ if __name__ == "__main__":
     ax = fig.add_subplot(1, 1, 1)
     s_1 = ax.scatter('Latitude', 'Longitude', c = 'Concentration', data = data_lat_long_official, cmap = 'RdYlGn_r', marker = 's', s = 190)
     ax.axis([
-        data_lat_long_official['Latitude'].min() - 0.05,
-        data_lat_long_official['Latitude'].max() + 0.05,
-        data_lat_long_official['Longitude'].min() - 0.05,
-        data_lat_long_official['Longitude'].max() + 0.05
+        data_lat_long_citizen['Latitude'].min() - 0.05,
+        data_lat_long_citizen['Latitude'].max() + 0.05,
+        data_lat_long_citizen['Longitude'].min() - 0.05,
+        data_lat_long_citizen['Longitude'].max() + 0.05
     ])
     ax.grid(which='both', alpha = 0.3)
     ax.grid(which='major', alpha = 0.3)

@@ -88,7 +88,7 @@ def rewrite_lines_for_heat_map(
 
 def merge_all_files_for_heatmap(
         new_file_path = '../../datathlon data/air-quality-citizen/Processed_heatmap_all_citizen.csv',
-        file_paths = ['../../datathlon data/air-quality-citizen/data_bg_2017.csv/data_bg_2017.csv', '../../datathlon data/air-quality-citizen/data_bg_2018.csv/data_bg_2018.csv']):
+        file_paths = ['../../datathlon data/air-quality-citizen/data_bg_2018.csv/data_bg_2018.csv']):
     new_file = open(new_file_path, 'a')
     new_file.write('DatetimeEndHash,Longitude,Latitude,Concentration\n')
     for path in file_paths:
