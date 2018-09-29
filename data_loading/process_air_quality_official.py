@@ -1,3 +1,5 @@
+from os import listdir
+from os.path import isfile, join
 import codecs
 from data_loading.data_load_utils import one_hot, process_date_air_official, time_hash, process_date_air_official
 
@@ -55,8 +57,11 @@ def long_lat_of_official_air_station(air_station_name):
     elif air_station_name == 'STA-BG0079A':
         return 23.383271, 42.655488
 
-def rewrite_lines_for_heatmap(new_file_path = '../../datathlon data/air-quality-official/Processed_heatmap_BG_5_9421_2013_timeseries.csv', file_to_read_path = '../../datathlon data/air-quality-official/BG_5_9421_2013_timeseries.csv'):
-    new_file = open(new_file_path, "w")
+def rewrite_lines_for_heatmap(
+        new_file_path = '../../datathlon data/air-quality-official/Processed_heatmap_BG_5_9421_2013_timeseries.csv',
+        file_to_read_path = '../../datathlon data/air-quality-official/BG_5_9421_2013_timeseries.csv',
+        file_writing_mode = 'w'):
+    new_file = open(new_file_path, file_writing_mode)
     f = codecs.open(file_to_read_path, "r", "utf-16")
     lines = f.readlines()
     new_file.write('DatetimeEndHash,Longitude,Latitude,Concentration\n')
@@ -73,6 +78,15 @@ def rewrite_lines_for_heatmap(new_file_path = '../../datathlon data/air-quality-
         ]
         new_file.write(','.join(array) + '\n')
 
+def merge_all_files_for_heatmap(new_file_path = '../../datathlon data/air-quality-official/Processed_heatmap_all.csv', dir_path = '../../datathlon data/air-quality-official'):
+    file_paths = [
+        dir_path + '/' + f
+            for f in listdir(dir_path)
+                if isfile(join(dir_path, f)) and f.startswith('BG') and ( f.endswith('2018_timeseries.csv') or f.endswith('2017_timeseries.csv') )
+    ]
+    for path in file_paths:
+        rewrite_lines_for_heatmap(new_file_path = new_file_path, file_to_read_path = path, file_writing_mode = 'a')
+
 def data_for_heatmap(file_to_read_path = '../../datathlon data/air-quality-official/Processed_heatmap_BG_5_9421_2013_timeseries.csv'):
     f = codecs.open(file_to_read_path, "r", "utf-8")
     lines = f.readlines()
@@ -85,5 +99,5 @@ def data_for_heatmap(file_to_read_path = '../../datathlon data/air-quality-offic
         yield time_hash, long, lat, concentration
 
 if __name__ == "__main__":
-    rewrite_lines_for_heatmap()
-
+    # rewrite_lines_for_heatmap()
+    merge_all_files_for_heatmap()

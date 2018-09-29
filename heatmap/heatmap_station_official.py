@@ -7,7 +7,7 @@ if __name__ == "__main__":
     # data = data_for_heatmap_official()
     # time_hash, long, lat, concentration = data.__next__()
 
-    data = pd.read_csv('../../datathlon data/air-quality-official/Processed_heatmap_BG_5_9421_2013_timeseries.csv')
+    data = pd.read_csv('../../datathlon data/air-quality-official/Processed_heatmap_all.csv')
     # print(data.head())
     # print(data.shape)
     # print(data.columns)
@@ -19,22 +19,22 @@ if __name__ == "__main__":
     # print(data_lat_long.head(10))
 
     data_lat_long = data_lat_long.reset_index()
-    print(data_lat_long.head())
-    major_ticks = np.arange(0, 50, 5)
-    minor_ticks = np.arange(0, 50, 1)
+    # print(data_lat_long.head())
+    # major_ticks = np.arange(0.2, 0.5, 0.01)
+    # minor_ticks = np.arange(0, 50, 1)
 
     fig = plt.figure(figsize=(6, 5))
     ax = fig.add_subplot(1, 1, 1)
     s = ax.scatter('Latitude', 'Longitude', c = 'Concentration', data = data_lat_long, cmap = 'Blues_r', marker = 's', s = 190)
     ax.axis([
-        data_lat_long['Latitude'].min() - 10,
-        data_lat_long['Latitude'].max() + 10,
-        data_lat_long['Longitude'].min() - 10,
-        data_lat_long['Longitude'].max() + 10
+        data_lat_long['Latitude'].min() - 0.05,
+        data_lat_long['Latitude'].max() + 0.05,
+        data_lat_long['Longitude'].min() - 0.05,
+        data_lat_long['Longitude'].max() + 0.05
     ])
-    ax.set_xticks(major_ticks)
-    ax.set_xticks(minor_ticks, minor = True)
-    ax.set_yticks(major_ticks)
+    # ax.set_xticks(major_ticks)
+    # ax.set_xticks(minor_ticks, minor = True)
+    # ax.set_yticks(major_ticks)
     ax.grid(which='both', alpha = 0.3)
     ax.grid(which='major', alpha = 0.3)
     ax.set_xlabel('Latitude', fontsize = 10);
