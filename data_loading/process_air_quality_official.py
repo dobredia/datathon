@@ -1,5 +1,5 @@
 import codecs
-from data_load_utils import one_hot, process_date_air_official, time_hash, process_date_air_official
+from data_loading.data_load_utils import one_hot, process_date_air_official, time_hash, process_date_air_official
 
 AirQualityStationVocab = ['STA-BG0040A', 'STA-BG0050A', 'STA-BG0052A', 'STA-BG0054A', 'STA-BG0073A', 'STA-BG0079A']
 SamplingProcessVocab = ['SPP-BG_A_BETA_andersenFH62IR', 'SPP-BG_A_BETA_thermo5030SHARP']
@@ -55,7 +55,7 @@ def long_lat_of_official_air_station(air_station_name):
     elif air_station_name == 'STA-BG0079A':
         return 23.383271, 42.655488
 
-def rewrite_lines_for_heatmap(new_file_path = '../../datathlon data/air-quality-official/Processed_BG_5_9421_2013_timeseries.csv', file_to_read_path = '../../datathlon data/air-quality-official/BG_5_9421_2013_timeseries.csv'):
+def rewrite_lines_for_heatmap(new_file_path = '../../datathlon data/air-quality-official/Processed_heatmap_BG_5_9421_2013_timeseries.csv', file_to_read_path = '../../datathlon data/air-quality-official/BG_5_9421_2013_timeseries.csv'):
     new_file = open(new_file_path, "w")
     f = codecs.open(file_to_read_path, "r", "utf-16")
     lines = f.readlines()

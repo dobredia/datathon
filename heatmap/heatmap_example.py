@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+
 helix = pd.read_csv('./helix_parameters.csv')
 helix.head()
 helix.shape
