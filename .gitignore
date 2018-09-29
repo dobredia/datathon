@@ -1,2 +1,3 @@
 .idea/
 data_loading/__pycache__/
+geohash/__pycache__/

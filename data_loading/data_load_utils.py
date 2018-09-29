@@ -20,3 +20,9 @@ def process_date_air_official(date_string):
     t = dt.utctimetuple()
     year, month, day, hour = t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour
     return year, month, day, hour
+
+def process_date_str(date_string):
+    dt = parse(date_string)
+    t = dt.utctimetuple()
+    year, month, day, hour = t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour
+    return year, month, day, hour
