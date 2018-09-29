@@ -59,6 +59,7 @@ def rewrite_lines_for_heatmap(new_file_path = '../../datathlon data/air-quality-
     new_file = open(new_file_path, "w")
     f = codecs.open(file_to_read_path, "r", "utf-16")
     lines = f.readlines()
+    new_file.write('DatetimeEndHash,Longitude,Latitude,Concentration\n')
     for line in lines[1:]:
         split = line.split(',')
         year, month, day, hour = process_date_air_official(split[14]) # DatetimeEnd
@@ -71,6 +72,17 @@ def rewrite_lines_for_heatmap(new_file_path = '../../datathlon data/air-quality-
             split[11],       # Concentration
         ]
         new_file.write(','.join(array) + '\n')
+
+def data_for_heatmap(file_to_read_path = '../../datathlon data/air-quality-official/Processed_heatmap_BG_5_9421_2013_timeseries.csv'):
+    f = codecs.open(file_to_read_path, "r", "utf-8")
+    lines = f.readlines()
+    for line in lines[1:]:
+        split = line.split(',')
+        time_hash = int(split[0])       # DatetimeEnd hash
+        long = float(split[1])          # Longitude
+        lat = float(split[2])           # Latitude
+        concentration = float(split[3]) # Concentration
+        yield time_hash, long, lat, concentration
 
 if __name__ == "__main__":
     rewrite_lines_for_heatmap()
