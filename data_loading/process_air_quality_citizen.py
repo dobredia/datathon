@@ -74,6 +74,8 @@ def rewrite_lines_for_heat_map(
         except:
             print('skipped record because can not decode location hash : ', split[1])
             continue
+        if lat < 42.62 or lat > 42.74 or lon > 23.45 or lon < 23.20:
+            continue
         pm_10 = split[2]
         array = [
             str(_time_hash),
