@@ -26,8 +26,12 @@ if __name__ == "__main__":
     fig = plt.figure(figsize=(6, 5))
     ax = fig.add_subplot(1, 1, 1)
     s = ax.scatter('Latitude', 'Longitude', c = 'Concentration', data = data_lat_long, cmap = 'Blues_r', marker = 's', s = 190)
-    ax.axis([data_lat_long['Latitude'].min() - 10, data_lat_long['Latitude'].max() + 10,
-             data_lat_long['Longitude'].min() - 10, data_lat_long['Longitude'].max() + 10])
+    ax.axis([
+        data_lat_long['Latitude'].min() - 10,
+        data_lat_long['Latitude'].max() + 10,
+        data_lat_long['Longitude'].min() - 10,
+        data_lat_long['Longitude'].max() + 10
+    ])
     ax.set_xticks(major_ticks)
     ax.set_xticks(minor_ticks, minor = True)
     ax.set_yticks(major_ticks)
