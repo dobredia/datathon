@@ -16,10 +16,13 @@ data_lat_long = couple_columns.groupby(['Latitude', 'Longitude']).mean()
 data_lat_long = data_lat_long.reset_index()
 np_data = data_lat_long.as_matrix()
 X_train = np_data[:, 0:2]
+Y_train = np_data[:, 2:3]
 
 # fit a Gaussian Mixture Model with two components
 clf = mixture.GaussianMixture(n_components=8, covariance_type='full')
-clf.fit(X_train)
+# clf.fit(X_train)
+# clf.fit(X_train, Y_train)
+clf.fit(Y_train)
 
 # display predicted scores by the model as a contour plot
 x = np.linspace(data_lat_long['Latitude'].min() - 0.05, data_lat_long['Latitude'].max() + 0.05)
@@ -34,7 +37,7 @@ Z = Z.reshape(X.shape)
 
 CS = plt.contour(X, Y, Z)
 
-# CB = plt.colorbar(CS, shrink=0.8, extend='both')
+# CB = plt.colorbar(CS, shrink=1, extend='both')
 CB = plt.colorbar(CS)
 
 plt.scatter(X_train[:, 0], X_train[:, 1], .8)
