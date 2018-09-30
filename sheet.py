@@ -1,5 +1,7 @@
 import numpy as np
 
-array = np.asarray([ [1, 2, 3], [4, 5, 6], [7, 8, 9] ])
+array1 = np.asarray([1, 2, 3])
 
-print(array[:, 1:2])
+array2 = np.asarray([0.5, 5, 10])
+
+print(array1 / array2)

@@ -108,6 +108,11 @@ def merge_citize_and_official():
 
             concentrations_weighted = weighted_sum / weights
 
+            cols = np_measurments[:, 0:3]
+            concentrations_weighted_col = np.expand_dims(concentrations_weighted, axis=1)
+            records = np.hstack((cols, concentrations_weighted_col))
+
+            print(records.shape)
 
         except:
             print('Record skipped from pearson caclualtion beacuse of error')
