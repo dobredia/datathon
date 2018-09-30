@@ -75,42 +75,44 @@ def merge_citize_and_official():
         else:
             by_citizen_station[station] = [measurement]
 
-    for station in by_citizen_station:
-        try:
-            measurements = by_citizen_station[station]
-            np_measurments = np.asarray(measurements)
+    print('LEN', len(by_citizen_station))
 
-            citizen = np.squeeze(np_measurments[:, 3:4])
-            official_1 = np.squeeze(np_measurments[:, 4:5])
-            official_2 = np.squeeze(np_measurments[:, 5:6])
-            official_3 = np.squeeze(np_measurments[:, 6:7])
-            official_4 = np.squeeze(np_measurments[:, 7:8])
-            official_5 = np.squeeze(np_measurments[:, 8:9])
-
-            pearson_1 = stats.pearsonr(citizen, official_1)[0]
-            pearson_2 = stats.pearsonr(citizen, official_2)[0]
-            pearson_3 = stats.pearsonr(citizen, official_3)[0]
-            pearson_4 = stats.pearsonr(citizen, official_4)[0]
-            pearson_5 = stats.pearsonr(citizen, official_5)[0]
-
-            if math.isnan(pearson_1) or math.isnan(pearson_2) or math.isnan(pearson_3) or math.isnan(pearson_4) or math.isnan(pearson_5):
-                continue
-
-            official_1_weighted = official_1 * pearson_1
-            official_2_weighted = official_2 * pearson_2
-            official_3_weighted = official_3 * pearson_3
-            official_4_weighted = official_4 * pearson_4
-            official_5_weighted = official_5 * pearson_5
-
-            weighted_sum = citizen + official_1_weighted + official_2_weighted + official_3_weighted + official_4_weighted + official_5_weighted
-
-            weights = 1 + pearson_1 + pearson_2 + pearson_3 + pearson_4 + pearson_5
-
-            concentrations_weighted = weighted_sum / weights
-
-
-        except:
-            print('Record skipped from pearson caclualtion beacuse of error')
+    # for station in by_citizen_station:
+    #     try:
+    #         measurements = by_citizen_station[station]
+    #         np_measurments = np.asarray(measurements)
+    #
+    #         citizen = np.squeeze(np_measurments[:, 3:4])
+    #         official_1 = np.squeeze(np_measurments[:, 4:5])
+    #         official_2 = np.squeeze(np_measurments[:, 5:6])
+    #         official_3 = np.squeeze(np_measurments[:, 6:7])
+    #         official_4 = np.squeeze(np_measurments[:, 7:8])
+    #         official_5 = np.squeeze(np_measurments[:, 8:9])
+    #
+    #         pearson_1 = stats.pearsonr(citizen, official_1)[0]
+    #         pearson_2 = stats.pearsonr(citizen, official_2)[0]
+    #         pearson_3 = stats.pearsonr(citizen, official_3)[0]
+    #         pearson_4 = stats.pearsonr(citizen, official_4)[0]
+    #         pearson_5 = stats.pearsonr(citizen, official_5)[0]
+    #
+    #         if math.isnan(pearson_1) or math.isnan(pearson_2) or math.isnan(pearson_3) or math.isnan(pearson_4) or math.isnan(pearson_5):
+    #             continue
+    #
+    #         official_1_weighted = official_1 * pearson_1
+    #         official_2_weighted = official_2 * pearson_2
+    #         official_3_weighted = official_3 * pearson_3
+    #         official_4_weighted = official_4 * pearson_4
+    #         official_5_weighted = official_5 * pearson_5
+    #
+    #         weighted_sum = citizen + official_1_weighted + official_2_weighted + official_3_weighted + official_4_weighted + official_5_weighted
+    #
+    #         weights = 1 + pearson_1 + pearson_2 + pearson_3 + pearson_4 + pearson_5
+    #
+    #         concentrations_weighted = weighted_sum / weights
+    #
+    #
+    #     except:
+    #         print('Record skipped from pearson caclualtion beacuse of error')
 
     print('Done')
 

@@ -75,6 +75,10 @@ def merge_citize_and_official():
         else:
             by_citizen_station[station] = [measurement]
 
+    weighted_measuements_file_path = '../../datathlon data/air-quality-citizen/Processed_heatmap_all_citizen_weighted.csv'
+
+    new_file = open(weighted_measuements_file_path, 'a')
+
     for station in by_citizen_station:
         try:
             measurements = by_citizen_station[station]
@@ -112,7 +116,9 @@ def merge_citize_and_official():
             concentrations_weighted_col = np.expand_dims(concentrations_weighted, axis=1)
             records = np.hstack((cols, concentrations_weighted_col))
 
-            print(records.shape)
+            for rec in records.tolist():
+                rec_str = [str(r) for r in rec]
+                new_file.write(','.join(rec_str) + '\n')
 
         except:
             print('Record skipped from pearson caclualtion beacuse of error')
